@@ -1,7 +1,6 @@
 package main.java.part01.lesson01.task02;
 
-
-import main.java.part01.lesson01.util.RandomNumber;
+import java.util.Random;
 
 /**
  * sqrt random number
@@ -9,13 +8,11 @@ import main.java.part01.lesson01.util.RandomNumber;
  */
 public class SqrtRandomNumber {
 
-    RandomNumber random = new RandomNumber();
-
     public void check(int count){
         double[] arr = new double[count];
 
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = random.getRandomNumberInRange(-80, 10000);
+            arr[i] = getRandomNumberInRange(-80, 10000);
         }
 
         try {
@@ -34,6 +31,22 @@ public class SqrtRandomNumber {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    /**
+     * generate random number
+     * @param min
+     * @param max
+     * @return
+     */
+    private static int getRandomNumberInRange(int min, int max) {
+
+        if (min >= max) {
+            throw new IllegalArgumentException("max must be greater than min");
+        }
+
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
     }
 
 }

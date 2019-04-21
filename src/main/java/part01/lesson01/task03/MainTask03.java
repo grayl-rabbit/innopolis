@@ -1,30 +1,20 @@
-package main.java.part01.lesson01;
+package main.java.part01.lesson01.task03;
 
-import main.java.part01.lesson01.task01.TestExceptions;
-import main.java.part01.lesson01.task02.SqrtRandomNumber;
-import main.java.part01.lesson01.task03.BubbleSortringServiceImpl;
-import main.java.part01.lesson01.task03.Person;
-import main.java.part01.lesson01.task03.QuickSortingServiceImpl;
-import main.java.part01.lesson01.task03.SortingService;
-import main.java.part01.lesson01.util.RandomNumber;
+import main.java.part01.lesson01.task03.service.BubbleSortringServiceImpl;
+import main.java.part01.lesson01.task03.service.QuickSortingServiceImpl;
+import main.java.part01.lesson01.task03.service.SortingService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
- * This is Main class for lesson 01-02
+ * Main class for task01
  * @author L
  */
-public class Main {
-
+public class MainTask03 {
 
     public static void main(String[] args) {
-
-        TestExceptions task01 = new TestExceptions();
-        task01.printAll();
-
-        SqrtRandomNumber numbers = new SqrtRandomNumber();
-        numbers.check(100);
 
         List<Person> people = createPersonList(1000);
 
@@ -55,7 +45,10 @@ public class Main {
     }
 
 
-
+    /**
+     * Print every person
+     * @param people
+     */
     private static void printAllPerson(List<Person> people){
 
         for(int i=0;i<people.size();i++){
@@ -65,14 +58,19 @@ public class Main {
         }
     }
 
+    /**
+     * generate random person list
+     * @param count
+     * @return
+     */
     private static List<Person> createPersonList(int count){
-        RandomNumber number = new RandomNumber();
+
         List<Person> people = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
             try {
-                people.add(new Person("Name" + number.getRandomNumberInRange(0,100),
-                        number.getRandomNumberInRange(-10,100), Person.Sex.getRandom()));
+                people.add(new Person("Name" + getRandomNumberInRange(0,100),
+                        getRandomNumberInRange(-10,100), Person.Sex.getRandom()));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -81,5 +79,19 @@ public class Main {
         return people;
     }
 
+    /**
+     * generate random number
+     * @param min
+     * @param max
+     * @return
+     */
+    private static int getRandomNumberInRange(int min, int max) {
 
+        if (min >= max) {
+            throw new IllegalArgumentException("max must be greater than min");
+        }
+
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
+    }
 }

@@ -1,4 +1,6 @@
-package main.java.part01.lesson01.task03;
+package main.java.part01.lesson01.task03.service;
+
+import main.java.part01.lesson01.task03.Person;
 
 import java.util.Collections;
 import java.util.Comparator;
