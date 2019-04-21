@@ -56,10 +56,24 @@ public class BubbleSort implements Sorting {
                     people.set(j, person1);
                     is_sorted = false;
                 }
+
+                checkDouble(person1, person2);
+
             }
             if (is_sorted) break;
         }
 
     }
+
+    private static void checkDouble(Person person1, Person person2) {
+        try{
+            if(person1.getName().equals(person2.getName()) && person1.getAge() == person2.getAge()){
+                throw new Exception("Same data person: name - " + person1.getName()+"; age - " + person1.getAge());
+            }
+        }catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 
 }
