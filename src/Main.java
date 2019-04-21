@@ -1,34 +1,29 @@
-import part01.lesson01.task03.BubbleSort;
-import part01.lesson01.task03.Person;
-import part01.lesson01.task03.QuickSort;
-import part01.lesson01.task03.Sorting;
+import main.java.part01.lesson01.task01.TestExceptions;
+import main.java.part01.lesson01.task02.SqrtRandomNumber;
+import main.java.part01.lesson01.task03.BubbleSortringServiceImpl;
+import main.java.part01.lesson01.task03.Person;
+import main.java.part01.lesson01.task03.QuickSortingServiceImpl;
+import main.java.part01.lesson01.task03.SortingService;
+import main.java.part01.lesson01.util.RandomNumber;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
+
     public static void main(String[] args) {
-//        Task01 task01 = new Task01();
-//        task01.hello();
-//        task01.npe();
-//        task01.indexOutOfBounds();
-//        task01.testError();
 
+        TestExceptions task01 = new TestExceptions();
+        task01.printAll();
 
+        SqrtRandomNumber numbers = new SqrtRandomNumber();
+        numbers.check(100);
 
-        List<Person> people = new ArrayList<>();
+        List<Person> people = createPersonList(1000);
 
-        for (int i = 0; i < 1000; i++) {
-            try {
-                people.add(new Person("Name"+getRandomNumberInRange(0,100), getRandomNumberInRange(-10,100), Person.Sex.getRandom()));
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-
-        }
-        Sorting quickSort = new QuickSort();
-        Sorting bubbleSort = new BubbleSort();
+        SortingService quickSort = new QuickSortingServiceImpl();
+        SortingService bubbleSort = new BubbleSortringServiceImpl();
 
         long startTime = System.currentTimeMillis();
 
@@ -45,7 +40,7 @@ public class Main {
         long elapsedMillis = stopTime-startTime;
         long elapsedSec = elapsedMillis/1000;
         long elapsedMin = elapsedMillis/60000;
-        System.out.printf("Sorting took %d minutes and %s secs and %d milliseconds \n",
+        System.out.printf("SortingService took %d minutes and %s secs and %d milliseconds \n",
                 elapsedMin,elapsedSec%60, elapsedMillis%1000);
 
         printAllPerson(people);
@@ -53,15 +48,7 @@ public class Main {
 
     }
 
-    private static int getRandomNumberInRange(int min, int max) {
 
-        if (min >= max) {
-            throw new IllegalArgumentException("max must be greater than min");
-        }
-
-        java.util.Random r = new java.util.Random();
-        return r.nextInt((max - min) + 1) + min;
-    }
 
     private static void printAllPerson(List<Person> people){
 
@@ -71,4 +58,22 @@ public class Main {
                     + "; sex - "+ people.get(i).getSex());
         }
     }
+
+    private static List<Person> createPersonList(int count){
+        RandomNumber number = new RandomNumber();
+        List<Person> people = new ArrayList<>();
+
+        for (int i = 0; i < count; i++) {
+            try {
+                people.add(new Person("Name" + number.getRandomNumberInRange(0,100),
+                        number.getRandomNumberInRange(-10,100), Person.Sex.getRandom()));
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+        return people;
+    }
+
+
 }

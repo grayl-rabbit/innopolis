@@ -1,4 +1,4 @@
-package part01.lesson01.task03;
+package main.java.part01.lesson01.task03;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -7,7 +7,12 @@ import java.util.List;
 import static java.util.Comparator.comparing;
 
 
-public class QuickSort implements Sorting {
+public class QuickSortingServiceImpl implements SortingService {
+    /**
+     * sort by sex(men higher)
+     * @param people
+     * @return list people
+     */
     @Override
     public List<Person> sexSort(List<Person> people) {
         Comparator<Person> comparator= comparing(Person::getSex)
@@ -16,6 +21,11 @@ public class QuickSort implements Sorting {
         return people;
     }
 
+    /**
+     * sort by age(higher older)
+     * @param people
+     * @return list people
+     */
     @Override
     public List<Person> ageSort(List<Person> people) {
         Comparator<Person> comparator= comparing(Person::getAge).reversed()
@@ -26,6 +36,11 @@ public class QuickSort implements Sorting {
     }
 
 
+    /**
+     * sort by alphabet
+     * @param people
+     * @return list people
+     */
     @Override
     public List<Person> alphabetSort(List<Person> people) {
         Comparator<Person> comparator= comparing(Person::getName)
@@ -34,6 +49,13 @@ public class QuickSort implements Sorting {
         return people;
     }
 
+
+    /**
+     * sort by sex, then by age and alphabet
+     * this method for test
+     * @param people
+     * @return list people
+     */
     public List<Person> mainSort(List<Person> people){
         Comparator<Person> comparator= comparing(Person::getSex)
                 .thenComparing(comparing(Person::getAge).reversed())
@@ -44,6 +66,10 @@ public class QuickSort implements Sorting {
         return people;
     }
 
+    /**
+     * check double entries by name and age
+     * @return
+     */
     private Comparator<Person> checkDouble() {
         return (o1, o2) -> {
             try{

@@ -1,11 +1,10 @@
-package part01.lesson01.task01;/*
- *  21.04.2019
- *  part01.lesson01.task01
- *  innopolis
- *  @author L
- */
+package main.java.part01.lesson01.task01;
 
-public class Exceptions {
+/**
+ * class for testing exceptions
+ * @author L
+ */
+public class TestExceptions {
 
     public void hello(){
         System.out.println("Hello World!");
@@ -39,6 +38,13 @@ public class Exceptions {
         }catch (StringIndexOutOfBoundsException e){
             System.out.println("StringIndexOutOfBoundsException Caught - " + e);
         }
+    }
+
+    public void printAll(){
+        hello();
+        npe();
+        indexOutOfBounds();
+        testError();
     }
 
 }

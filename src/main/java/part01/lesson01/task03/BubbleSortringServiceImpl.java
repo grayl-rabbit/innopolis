@@ -1,20 +1,35 @@
-package part01.lesson01.task03;
+package main.java.part01.lesson01.task03;
 
 import java.util.List;
 
-public class BubbleSort implements Sorting {
+public class BubbleSortringServiceImpl implements SortingService {
+    /**
+     * sort by sex(men higher)
+     * @param people
+     * @return list people
+     */
     @Override
     public List<Person> sexSort(List<Person> people) {
         mainSort(people, "sex");
         return people;
     }
 
+    /**
+     * sort by age(higher older)
+     * @param people
+     * @return list people
+     */
     @Override
     public List<Person> ageSort(List<Person> people) {
         mainSort(people, "age");
         return people;
     }
 
+    /**
+     * sort by alphabet
+     * @param people
+     * @return list people
+     */
     @Override
     public List<Person> alphabetSort(List<Person> people) {
         mainSort(people, "name");
@@ -22,6 +37,11 @@ public class BubbleSort implements Sorting {
     }
 
 
+    /**
+     * sort list by type
+     * @param people
+     * @param type - sort type(age, sex, alphabet)
+     */
     private static void mainSort(List<Person> people, String type) {
 
         int length = people.size();
@@ -65,6 +85,11 @@ public class BubbleSort implements Sorting {
 
     }
 
+    /**
+     * check double entries by name and age
+     * @param person1
+     * @param person2
+     */
     private static void checkDouble(Person person1, Person person2) {
         try{
             if(person1.getName().equals(person2.getName()) && person1.getAge() == person2.getAge()){

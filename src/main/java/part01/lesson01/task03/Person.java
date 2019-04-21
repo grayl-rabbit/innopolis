@@ -1,5 +1,9 @@
-package part01.lesson01.task03;
+package main.java.part01.lesson01.task03;
 
+/**
+ * This class create Person object
+ * @author L
+ */
 public class Person {
     private String name;
     private int age;
@@ -45,4 +49,6 @@ public class Person {
     public void setSex(Sex sex) {
         this.sex = sex;
     }
+
+
 }
