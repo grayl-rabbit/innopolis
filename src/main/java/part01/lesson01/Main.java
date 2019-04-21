@@ -1,3 +1,5 @@
+package main.java.part01.lesson01;
+
 import main.java.part01.lesson01.task01.TestExceptions;
 import main.java.part01.lesson01.task02.SqrtRandomNumber;
 import main.java.part01.lesson01.task03.BubbleSortringServiceImpl;
@@ -9,6 +11,10 @@ import main.java.part01.lesson01.util.RandomNumber;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is Main class for lesson 01-02
+ * @author L
+ */
 public class Main {
 
 
@@ -28,7 +34,7 @@ public class Main {
         long startTime = System.currentTimeMillis();
 
 //        quickSort.mainSort(people);
-//        quickSort.ageSort(people);
+        quickSort.ageSort(people);
 //        quickSort.alphabetSort(people);
 //        quickSort.sexSort(people);
 

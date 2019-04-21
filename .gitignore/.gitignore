@@ -12,3 +12,4 @@
 .idea/**/dbnavigator.xml
 out/
 .idea_modules/
+src/javadoc/**
