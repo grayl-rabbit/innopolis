@@ -24,13 +24,15 @@ public class MainTask03 {
         long startTime = System.currentTimeMillis();
 
 //        quickSort.mainSort(people);
-        quickSort.ageSort(people);
+//        quickSort.ageSort(people);
 //        quickSort.alphabetSort(people);
 //        quickSort.sexSort(people);
 
 //        bubbleSort.ageSort(people);
 //        bubbleSort.alphabetSort(people);
 //        bubbleSort.sexSort(people);
+
+        bubbleSort.mainSort(people);
 
         long stopTime = System.currentTimeMillis();
         long elapsedMillis = stopTime-startTime;

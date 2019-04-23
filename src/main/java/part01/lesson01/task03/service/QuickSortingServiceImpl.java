@@ -58,6 +58,7 @@ public class QuickSortingServiceImpl implements SortingService {
      * @param people
      * @return list people
      */
+    @Override
     public List<Person> mainSort(List<Person> people){
         Comparator<Person> comparator= comparing(Person::getSex)
                 .thenComparing(comparing(Person::getAge).reversed())

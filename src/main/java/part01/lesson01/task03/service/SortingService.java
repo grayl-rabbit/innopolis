@@ -8,4 +8,5 @@ public interface SortingService {
     List<Person> sexSort(List<Person> people);
     List<Person> ageSort(List<Person> people);
     List<Person> alphabetSort(List<Person> people);
+    List<Person> mainSort(List<Person> people);
 }
