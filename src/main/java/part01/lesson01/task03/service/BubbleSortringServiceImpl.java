@@ -94,7 +94,7 @@ public class BubbleSortringServiceImpl implements SortingService {
     }
 
     /**
-     * sort list by age then sex and alphabet
+     * sort list by sex then age and alphabet
      * @param people
      */
     private static void mainSort2(List<Person> people) {
@@ -153,10 +153,10 @@ public class BubbleSortringServiceImpl implements SortingService {
     private static void checkDouble(Person person1, Person person2) {
         try{
             if(person1.getName().equals(person2.getName()) && person1.getAge() == person2.getAge()){
-                throw new Exception("Same data person: name - " + person1.getName()+"; age - " + person1.getAge());
+                throw new RuntimeException("Same data person: name - " + person1.getName()+"; age - " + person1.getAge());
             }
-        }catch (Exception e) {
-            System.out.println(e);
+        }catch (RuntimeException e) {
+            System.out.println(e.getMessage());
         }
     }
 
