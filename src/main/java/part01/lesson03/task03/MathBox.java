@@ -1,21 +1,12 @@
-package main.java.part01.lesson03.task01;
+package main.java.part01.lesson03.task03;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
-/**
- * Class for calculations
- * The constructor receives an array of Number.
- * Items cannot be repeated.
- * @author L
- * @param <T>
- */
-public class MathBox<T extends Number> {
-
-    private T[] arr;
+public class MathBox<T extends Number> extends ObjectBox<T>{
 
     public MathBox(T[] arr) {
-        this.arr = arr;
+        super(arr);
         checkDouble(arr);
     }
 
@@ -39,17 +30,6 @@ public class MathBox<T extends Number> {
     }
 
     /**
-     * sum of all elements
-     * @return the sum of all elements of the collection
-     */
-    public Double summator() {
-        return Arrays.stream(arr)
-                .map(Number::doubleValue)
-                .reduce((s1, s2) -> s1 + s2)
-                .orElse(0D);
-    }
-
-    /**
      * alternately dividing all the elements stored
      * in the object by the divisor
      * @param val
@@ -58,11 +38,11 @@ public class MathBox<T extends Number> {
     public <V> void splitter(V val){
 
         if(val instanceof Number && !val.equals(0)){
-            for (int i = 0; i < arr.length; i++) {
-                Number item = arr[i];
+            for (int i = 0; i < collection.length; i++) {
+                Number item = collection[i];
                 Number number = (Number) val;
                 Number value = item.doubleValue() / number.doubleValue();
-                arr[i] = ((T)value);
+                collection[i] = ((T)value);
             }
         }else{
             throw new IllegalArgumentException("Illegal param");
@@ -70,6 +50,16 @@ public class MathBox<T extends Number> {
 
     }
 
+    /**
+     * sum of all elements
+     * @return the sum of all elements of the collection
+     */
+    public  Double summator() {
+        return Arrays.stream(collection)
+                .map(Number::doubleValue)
+                .reduce((s1, s2) -> s1 + s2)
+                .orElse(0D);
+    }
 
     /**
      * remove value if found
@@ -77,16 +67,16 @@ public class MathBox<T extends Number> {
      */
     public void removeIteration(Integer i){
         int amount = countDouble(i);
-        T[] objects = (T[]) Array.newInstance(Number.class, arr.length - amount);
+        T[] objects = (T[]) Array.newInstance(Number.class, collection.length - amount);
 
         int index = 0;
-        for (T elem: arr) {
+        for (T elem: collection) {
             if (elem.intValue() != i) {
                 objects[index] = elem;
                 index++;
             }
         }
-        arr = objects;
+        collection = objects;
     }
 
     /**
@@ -96,7 +86,7 @@ public class MathBox<T extends Number> {
      */
     private int countDouble(Integer i){
         int amount = 0;
-        for (T elem: arr) {
+        for (T elem: collection) {
             if (elem.intValue() == i) {
                 amount++;
             }
@@ -109,19 +99,19 @@ public class MathBox<T extends Number> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MathBox<?> mathBox = (MathBox<?>) o;
-        return Arrays.equals(arr, mathBox.arr);
+        return Arrays.equals(collection, mathBox.collection);
     }
 
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(arr);
+        return Arrays.hashCode(collection);
     }
 
     @Override
     public String toString() {
-        return "MathBox2{" +
-                "arr=" + Arrays.toString(arr) +
+        return "MathBox{" +
+                "collection=" + Arrays.toString(collection) +
                 '}';
     }
 }
