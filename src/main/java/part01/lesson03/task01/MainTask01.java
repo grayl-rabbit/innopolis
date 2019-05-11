@@ -1,6 +1,14 @@
 package main.java.part01.lesson03.task01;
 
-
+/**
+ * Main class for task01
+ * Shows the implementation of methods:
+ * 1 - generic class MathBox
+ * 2 - summator - return the sum of all elements
+ * 3 - splitter - division by argument
+ * 4 - remove argument from collection
+ * @author L
+ */
 public class MainTask01 {
 
     public static void main(String[] args) {

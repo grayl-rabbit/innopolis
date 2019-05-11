@@ -3,6 +3,13 @@ package main.java.part01.lesson03.task01;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
+/**
+ * Class for calculations
+ * The constructor receives an array of Number.
+ * Items cannot be repeated.
+ * @author L
+ * @param <T>
+ */
 public class MathBox<T extends Number> {
 
     private T[] arr;
@@ -11,26 +18,6 @@ public class MathBox<T extends Number> {
         this.arr = arr;
         checkDouble(arr);
     }
-
-    private boolean isDouble(Number value){
-        return value.toString().contains(".");
-    }
-
-//    public T summator() {
-//        if (isDouble(arr[0])) {
-//            Double result = 0D;
-//            for (int i = 0; i < arr.length; i++) {
-//                result += arr[i].doubleValue();
-//            }
-//            return (T) (result);
-//        }
-//
-//        Long result = 0L;
-//        for (int i = 0; i < arr.length; i++) {
-//            result += arr[i].longValue();
-//        }
-//        return (T) (result);
-//    }
 
     /**
      * check repeated items
