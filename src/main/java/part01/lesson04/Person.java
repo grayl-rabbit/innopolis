@@ -1,5 +1,9 @@
 package main.java.part01.lesson04;
 
+/**
+ * Class Person  - animal owner.
+ * @author L
+ */
 public class Person {
     private String name;
     private int age;

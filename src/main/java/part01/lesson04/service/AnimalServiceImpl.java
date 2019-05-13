@@ -1,56 +1,93 @@
-package main.java.part01.lesson04.service;/*
- *  11.05.2019
- *  main.java.part01.lesson04.service
- *  innopolis
- *  @author L
- */
-
-import main.java.part01.lesson01.task03.Person;
+package main.java.part01.lesson04.service;
 import main.java.part01.lesson04.Animal;
-import main.java.part01.lesson04.dto.AnimalDto;
 
-import java.util.*;
-
-import static java.util.Comparator.comparing;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class AnimalServiceImpl implements AnimalService {
 
+    /**
+     * find animal by nickname
+     * @param nickname - animal nickname
+     * @param animals animals list
+     * @return animals list
+     */
     @Override
     public List<Animal> findByNickname(String nickname, List<Animal> animals) {
-        List<Animal> animalList = new ArrayList<>();
-        animals.stream()
+        return animals.stream()
                 .filter(animal -> nickname.equals(animal.getNickname()))
-                .forEach(animalList::add);
-        return animalList;
+                .collect(Collectors.toList());
     }
 
+    /**
+     * update animal data
+     * @param newAnimal - new data for object
+     * @param animals - animals list
+     */
     @Override
-    public List<Animal> update(UUID id, AnimalDto newAnimal, List<Animal> animals){
-        Animal animal = findByUUID(id, animals);
-        int i = animals.indexOf(animal);
+    public void update(Animal newAnimal, List<Animal> animals){
+        Animal animal = findByUUID(newAnimal.getId(), animals);
         animal.setNickname(newAnimal.getNickname());
         animal.setOwner(newAnimal.getOwner());
         animal.setWeight(newAnimal.getWeight());
-        animals.set(i, animal);
-        return animals;
     }
 
+    /**
+     * find animal by UUID
+     * @param id - UUID
+     * @param animals - animals list
+     * @return Animal
+     */
     @Override
     public Animal findByUUID(UUID id, List<Animal> animals){
-        Animal animal = animals.stream()
+        return animals.stream()
                 .filter(item -> id.equals(item.getId()))
                 .findAny()
-                .orElse(null);
-
-        return animal;
+                .orElseThrow(() -> new RuntimeException("animal not found"));
     }
 
+    /**
+     * Sorting animal list
+     * @param animals - animals list
+     */
     @Override
-    public List<Animal> sorting(List<Animal> animals){
-//        Comparator<Animal> comparator= Comparator.comparing(Person::getName);
-//        Comparator<Animal> comparator = Comparator
-//                .comparing(animal -> animal.getOwner().getName());
-//        Collections.sort(animals, comparator);
-        return animals;
+    public void sorting(List<Animal> animals){
+        Collections.sort(animals);
     }
+
+    /**
+     * add animal to animal list
+     * if animal doesn't exist
+     * @param animal - animal to add
+     * @param animals - animals list
+     */
+    @Override
+    public void addAnimal(Animal animal, List<Animal> animals){
+        try {
+            if (!isExist(animal, animals)) {
+                animals.add(animal);
+            } else {
+                throw new RuntimeException("The animal is already exist");
+            }
+        }catch (RuntimeException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * check the existence of an animal in the list
+     * @param animal - animal sought
+     * @param animals - animals list
+     * @return
+     */
+    @Override
+    public boolean isExist(Animal animal, List<Animal> animals){
+
+        return animals.stream().anyMatch(animal1 -> animal1.getNickname().equals(animal.getNickname())
+                && (animal1.getWeight() == animal.getWeight())
+                && animal1.getOwner() == animal.getOwner());
+    }
+
 }
