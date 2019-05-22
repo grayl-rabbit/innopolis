@@ -16,22 +16,13 @@ import java.util.Random;
 import static java.nio.file.StandardOpenOption.CREATE;
 
 public class RandomUtils {
-    private static boolean probability;
+
     private static List<String> words;
 
-
     public RandomUtils() {
-        setProbability();
         setWords();
     }
 
-    public boolean isProbability() {
-        return probability;
-    }
-
-    public void setProbability() {
-        this.probability = getProbabilityResult(70);
-    }
 
     public List<String> getWords() {
         return words;
@@ -50,11 +41,11 @@ public class RandomUtils {
      * @param countWord
      * @return string
      */
-    public static String getRandomSentence(int countWord){
+    public static String getRandomSentence(int countWord, int probability){
         String sentence="";
         String firstWord;
-
-        if(probability){
+        boolean probabilityResult = getProbabilityResult(probability);
+        if(probabilityResult){
             int randomIndex = getRandomNumberInRange(1, words.size()-1);
             firstWord = words.get(randomIndex);
         }else {
@@ -89,10 +80,10 @@ public class RandomUtils {
      * @param sentenceCount
      * @return string
      */
-    public static String getRandomParagraph(int sentenceCount){
+    public static String getRandomParagraph(int sentenceCount,int probability){
         String paragraph = "";
         for(int i = 0; i < sentenceCount; i++) {
-            paragraph += getRandomSentence(getRandomNumberInRange(1, 15));
+            paragraph += getRandomSentence(getRandomNumberInRange(1, 15), probability);
         }
         return paragraph +"\n\r";
     }
@@ -176,17 +167,25 @@ public class RandomUtils {
         return list;
     }
 
-    public void getFiles( int probability) throws IOException {
+    public void getFiles( String path, int probability)  {
+        Path fileWrite = Paths.get(path);
         boolean probabilityResult = getProbabilityResult(probability);
 
-        String s = "Hello World! ";
+        String text ="";
+        for(int i = 0; i < 10; i++)
+//            text.append(getRandomParagraph(getRandomNumberInRange(1, 5), probability));
+            text += getRandomParagraph(getRandomNumberInRange(1, 5), probability);
+        System.out.println(text);
+
+        System.out.println(text.getBytes());
+
         byte b = 100;
         byte size = new Byte(b);
+//        byte[] byteVal = str.getBytes();
         byte[] data = new byte[1000];
-        Path p = Paths.get("./src/main/java/part01/lesson05/logfile.txt");
 
         try (OutputStream out = new BufferedOutputStream(
-                Files.newOutputStream(p, CREATE))) {
+                Files.newOutputStream(fileWrite, CREATE))) {
             out.write(data, 0, size);
         } catch (IOException x) {
             System.err.println(x);
