@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
@@ -20,15 +21,23 @@ public class Main {
 
         Path fileWrite = Paths.get("src/main/java/part01/lesson05/task01/result");
 
-        List<String> bel = Files.readAllLines(fileRead);
+/*Spent 78 milliseconds
 
+        List<String> bel = Files.readAllLines(fileRead);
         List<String> collect = bel.stream()
                 .map(String::toLowerCase)
                 .sorted()
                 .distinct()
                 .collect(Collectors.toList());
-
          Files.write(fileWrite, collect);
-    }
+*/
 
+        /*Spent 62 millisecond*/
+
+        TreeSet<String> set = new TreeSet<>(String::compareToIgnoreCase);
+        set.addAll(Files.readAllLines(fileRead));
+
+        Files.write(fileWrite, set);
+
+    }
 }
