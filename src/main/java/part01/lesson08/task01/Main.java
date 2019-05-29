@@ -36,7 +36,7 @@ public class Main {
         fileManager.setLocation(StandardLocation.SOURCE_OUTPUT,  Arrays.asList(path.toFile().getParentFile()));
 
 //        String[] opt = new String[]{"-d", "src/target/production/innopolis"};
-        Iterable<? extends JavaFileObject> compilationUnits = fileManager.getJavaFileObjectsFromFiles(Arrays.asList(Paths.get("src/main/java/part01/lesson08/task01/SomeClass.java").toFile()));
+        Iterable<? extends JavaFileObject> compilationUnits = fileManager.getJavaFileObjectsFromFiles(Arrays.asList(path.toFile()));
         compiler.getTask(null, fileManager, null,null, null, compilationUnits).call();
         fileManager.close();
 
