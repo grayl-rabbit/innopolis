@@ -1,9 +1,13 @@
-package main.java.part01.lesson12.task01;
+package main.java.part01.lesson12;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Class with main settings to connect to DB
+ * checkConnectDB - method to check connect to DB
+ */
 public final class SettingsDB {
 
     public SettingsDB() {
@@ -13,7 +17,7 @@ public final class SettingsDB {
     public static final String USER = "postgres";
     public static final String PASS = "root";
 
-    public static void checkConnectDB(){
+    public static boolean checkConnectDB(){
         System.out.println("Testing connection to PostgreSQL JDBC");
 
         try {
@@ -21,11 +25,11 @@ public final class SettingsDB {
         } catch (ClassNotFoundException e) {
             System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
             e.printStackTrace();
-            return;
+            return false;
         }
 
         System.out.println("PostgreSQL JDBC Driver successfully connected");
-        Connection connection = null;
+        Connection connection;
 
         try {
             connection = DriverManager
@@ -34,13 +38,15 @@ public final class SettingsDB {
         } catch (SQLException e) {
             System.out.println("Connection Failed");
             e.printStackTrace();
-            return;
+            return false;
         }
 
         if (connection != null) {
             System.out.println("You successfully connected to database now");
+            return true;
         } else {
             System.out.println("Failed to make connection to database");
+            return false;
         }
     }
 }
