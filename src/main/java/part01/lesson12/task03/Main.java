@@ -1,4 +1,4 @@
-package main.java.part01.lesson12.task03.Main;
+package main.java.part01.lesson12.task03;
 
 import java.sql.*;
 
