@@ -17,6 +17,10 @@ public final class SettingsDB {
     public static final String USER = "postgres";
     public static final String PASS = "root";
 
+    /**
+     * method to check connect to DB
+     * @return boolean
+     */
     public static boolean checkConnectDB(){
         System.out.println("Testing connection to PostgreSQL JDBC");
 

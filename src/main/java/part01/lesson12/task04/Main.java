@@ -89,6 +89,11 @@ public class Main {
 
     }
 
+    /**
+     * print id and name all items from table user
+     * @param resultSet
+     * @throws SQLException
+     */
     private static void printUsers(ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
             int id = resultSet.getInt("id");
