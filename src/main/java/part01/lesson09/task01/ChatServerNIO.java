@@ -46,7 +46,6 @@ public class ChatServerNIO implements Runnable {
                     selector.select();
                     Set<SelectionKey> keys = selector.selectedKeys();
                     for (SelectionKey sk : keys) {
-                        System.out.println(sk.channel());
                         if (!sk.isValid()) {
                             continue;
                         }
@@ -58,8 +57,7 @@ public class ChatServerNIO implements Runnable {
                             SelectionKey skr = sc.register(selector, SelectionKey.OP_READ);
                             ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
                             //first enter nick
-                            String s = StandardCharsets.UTF_8.decode(byteBuffer).toString();
-                            System.out.println(s);
+                            String nick = StandardCharsets.UTF_8.decode(byteBuffer).toString();
                             connections.put(skr, byteBuffer);
                         }
                         //get msg

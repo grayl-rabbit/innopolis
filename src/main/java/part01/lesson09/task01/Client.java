@@ -14,13 +14,7 @@ public class Client {
     final BufferedWriter socketWriter;
     final BufferedReader userInput;
     private String nickname;
-    /**
-     * Конструктор объекта клиента
-     * @param host - IP адрес или localhost или доменное имя
-     * @param port - порт, на котором висит сервер
-     * @throws IOException - если не смогли приконнектиться, кидается исключение, чтобы
-     * предотвратить создание объекта
-     */
+
     public Client(String host, int port) throws IOException {
 
         setNickname();
@@ -54,7 +48,7 @@ public class Client {
      * read from console and send to server
      */
     public void run() {
-        System.out.println("Type phrase(socket) (hit Enter to exit):");
+        System.out.println("Type: ");
 
         while (true) {
             String userString = null;
